@@ -295,6 +295,14 @@ $ sudo journalctl _PID=1
 管道是一种通信机制，通常用于进程间的通信，它表现出来的形式将前面每一个进程的输出（stdout）直接作为下一个进程的输入（stdin）。
 `ls * | grep *.c | vim -` 管道实例，`-`代表标准输出
 `tee` 保存管道的输入内容，同时传递给下一个管道
+#### 例：
+经典的组面题 - 如何输出一个文件夹的前 / 后 X 个文件的文件名
+- 前X个文件（按字母顺序）：
+`ls | sort | head -n X`
+- 后X个文件（按字母顺序的逆序）：
+`ls | sort -r | head -n X`
+如何输出最新的X个文件
+`ls -lt | head -n 5`
 # 构建工具make
  安排编译的先后、链接等等的工具就是make
 [参考](https://www.liaoxuefeng.com/wiki/1599771213037600)
@@ -383,3 +391,10 @@ square.o: square.h
 main1.o: main1.c 
 main2.o: main2.c
 ```
+## 例：
+对于Makefile⼯具，可以考虑如何通过写Makefile启动你的项⽬。比如通过 make start启动项⽬⽽不是使⽤裸命令。
+`touch Makefile // 新建Makefile`
+`vim Makefile`
+makefile内容如下
+`start:
+	go run ./main.go -arg1 -arg2 -arg3`
